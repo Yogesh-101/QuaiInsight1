@@ -1,0 +1,50 @@
+{
+  "name": "quai-insight",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Real-time analytics dashboard for the Quai Network",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "ingest": "node scripts/ingest-blocks.mjs",
+    "ingest:continuous": "node scripts/ingest-blocks.mjs --continuous"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.93.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "date-fns": "^4.1.0",
+    "dotenv": "^17.2.3",
+    "framer-motion": "^12.29.2",
+    "lucide-react": "^0.300.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^3.7.0",
+    "tailwind-merge": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4",
+    "vite": "^5.3.1"
+  },
+  "keywords": [
+    "quai",
+    "blockchain",
+    "analytics",
+    "dashboard",
+    "web3"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
