@@ -7,7 +7,7 @@
 -   **Multi-Zone Analytics**: Real-time monitoring across the entire Quai hierarchy (Prime, Region, Zone). Toggle between shards like **Cyprus-1**, **Paxos-2**, or **Hydra-3** to see localized chain heartbeats.
 -   **Supabase Caching Layer**: Implements a high-performance caching strategy using Supabase to store block headers (`Block Height`, `Gas Used`, `Txs`). This reduces RPC overhead and enables lightning-fast historical charting.
 -   **Developer Insights**: Adaptive AI-driven summaries (simulated) that analyze zone throughput and finality (e.g., sub-second finality detection for Hydra shards).
--   **Full-Stack Search**: Instantly lookup Addresses, Transaction Hashes, or Block Heights across any zone.
+-   **Full-Stack Search**: Instantly look up addresses, Transaction Hashes, or Block Heights across any zone.
 -   **Chain Portfolio**: A production-ready wallet view to check balances and authenticated zones for any Quai address.
 -   **Visual Excellence**: Built with a sleek, dark-mode glassmorphism aesthetic using React, Tailwind CSS, and Framer Motion.
 
@@ -50,15 +50,4 @@
     ```bash
     npm run ingest:continuous
     ```
-
-## 📊 Database Schema (Supabase)
-
-The project recommends a `blocks` table with the following structure:
--   `block_number` (BigInt, Primary Key)
--   `hash` (Text)
--   `parent_hash` (Text)
--   `timestamp` (Timestamp)
--   `tx_count` (Int)
--   `gas_used` (BigInt)
--   `zone` (Text, Indexed)
 
