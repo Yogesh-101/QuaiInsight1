@@ -15,9 +15,13 @@ import {
 
 // --- Production Utilities ---
 const checkEnvironment = () => {
-    const isSupabaseMissing = !import.meta.env.VITE_SUPABASE_URL || import.meta.env.VITE_SUPABASE_URL.includes('your-project');
-    const isAnonKeyMissing = !import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.VITE_SUPABASE_ANON_KEY.length < 20;
-    return { isSupabaseMissing, isAnonKeyMissing };
+    try {
+        const isSupabaseMissing = !import.meta.env.VITE_SUPABASE_URL || import.meta.env.VITE_SUPABASE_URL.includes('your-project');
+        const isAnonKeyMissing = !import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.VITE_SUPABASE_ANON_KEY.length < 20;
+        return { isSupabaseMissing, isAnonKeyMissing };
+    } catch (e) {
+        return { isSupabaseMissing: true, isAnonKeyMissing: true };
+    }
 };
 
 // --- Sub-Components ---
@@ -137,8 +141,13 @@ export default function DashboardPage({ onNavigate, initialSearchQuery, onSignOu
     // Search/Settings State
     const [searchResults, setSearchResults] = useState(null);
     const [settings, setSettings] = useState(() => {
-        const saved = localStorage.getItem("quai_settings");
-        return saved ? JSON.parse(saved) : { liveRefresh: true, searchAnimations: true, rpcEndpoint: "https://rpc.quai.network/" };
+        try {
+            const saved = localStorage.getItem("quai_settings");
+            return saved ? JSON.parse(saved) : { liveRefresh: true, searchAnimations: true, rpcEndpoint: "https://rpc.quai.network/" };
+        } catch (e) {
+            console.warn("Failed to parse settings from localStorage:", e);
+            return { liveRefresh: true, searchAnimations: true, rpcEndpoint: "https://rpc.quai.network/" };
+        }
     });
 
     useEffect(() => {
@@ -218,16 +227,20 @@ export default function DashboardPage({ onNavigate, initialSearchQuery, onSignOu
                 throw new Error("RPC_OFFLINE");
             }
         } catch (error) {
+            console.error("Dashboard Fetch Error:", error);
             setIsOnline(false);
             if (recentBlocks.length === 0) {
-                setRecentBlocks(Array.from({ length: 8 }, (_, i) => ({
+                // Generate fallback data only if we have nothing at all
+                const fallbackBlocks = Array.from({ length: 8 }, (_, i) => ({
                     number: 6210000 - i,
                     hash: `0x${Math.random().toString(16).slice(2, 10)}...`,
                     timestamp: new Date(Date.now() - i * 13000).toISOString(),
                     txCount: 5 + i,
                     gasUsed: 10000000,
                     zone: selectedZone
-                })));
+                }));
+                setRecentBlocks(fallbackBlocks);
+                setChartData(fallbackBlocks);
             }
         } finally {
             setLoading(false);

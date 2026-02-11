@@ -51,6 +51,29 @@
     npm run ingest:continuous
     ```
 
+## 🚀 Production Readiness
+
+This project is optimized for deployment on Vercel with a focus on security, performance, and stability.
+
+### Security Enhancements
+- **Security Headers**: Configured via `vercel.json` including CSP, HSTS, and X-Frame-Options.
+- **Data Sanitization**: Robust handling of localStorage and environment variables.
+- **API Resilience**: Fallback logic for RPC failures.
+
+### Performance Optimizations
+- **Font Preloading**: Critical fonts are preconnected and preloaded in `index.html`.
+- **Intelligent Caching**: In-memory caching for RPC and QuaiScan API calls.
+- **Optimized Assets**: Optimized MP4 background and PWA manifest.
+
+### 📦 Deployment on Vercel
+
+1. **Set Environment Variables**: In your Vercel Dashboard, add:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+2. **Framework Detection**: Vercel will automatically detect Vite. 
+3. **Build Command**: `npm run build`
+4. **Output Directory**: `dist` (default for Vite)
+
 ## 📊 Database Schema (Supabase)
 
 The project recommends a `blocks` table with the following structure:
