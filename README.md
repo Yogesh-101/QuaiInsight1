@@ -62,12 +62,3 @@ The project recommends a `blocks` table with the following structure:
 -   `gas_used` (BigInt)
 -   `zone` (Text, Indexed)
 
-## 🏆 Hackathon Strategic Implementation
-
--   **Problem Solved**: Raw blockchain data is fragmented and slow. QuaiInsight aggregates hierarchical data into a single, high-performance interface.
--   **Differentiator**: Unlike basic explorers, this dashboard automatically detects "Node Lag" and switches to a failover mock data stream to ensure the UI never feels broken or empty.
--   **Production Ready**: Includes user profile management, session control (Sign Out), and detailed system metrics (RPC Latency, IOPS).
-
-Developed for the **Vibe Coding 12-Hour Hackathon**. 
-*Time Spent: ~11 Hours*
-*Status: MVP Complete & Production Ready*
